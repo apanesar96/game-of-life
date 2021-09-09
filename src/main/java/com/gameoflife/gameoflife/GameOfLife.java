@@ -1,21 +1,17 @@
 package com.gameoflife.gameoflife;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 public class GameOfLife {
-	private Cell [][] boardState;
+	private Cell[][] boardState;
 
 	public GameOfLife(Cell[][] seedState) {
 		boardState = seedState;
 	}
 
 	public Cell[][] nextGen() {
-		Cell [][] nextGenGrid = boardState;
+		Cell[][] nextGenGrid = boardState;
 
 		for (int i = 0; i < boardState.length; i++) {
 			for (int j = 0; j < boardState[i].length; j++) {
