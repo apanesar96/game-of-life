@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -14,79 +15,80 @@ class GameOfLifeShould {
 	@Test
 	void contain_single_dead_cell() {
 		//given
-		boolean [][] seedState = {{false}};
+		Cell[][] seedState = {{new DeadCell(0,0)}};
 		target = new GameOfLife(seedState);
 		//when
-		boolean [][] currentState = target.nextGen();
+		Cell[][] currentState = target.nextGen();
 		//then
-		assertFalse(currentState[0][0]);
+		assertTrue(currentState[0][0] instanceof DeadCell);
 	}
 
 	@Test
 	void contain_single_dead_cell_if_a_single_alive_cell_is_passed() {
 		//given
-		boolean [][] seedState = {{true}};
+		Cell [][] seedState = {{new AliveCell(0,0)}};
 		target = new GameOfLife(seedState);
 		//when
-		boolean [][] currentState = target.nextGen();
+		Cell[][] currentState = target.nextGen();
 		//then
-		assertFalse(currentState[0][0]);
+		assertTrue(currentState[0][0] instanceof DeadCell);
 	}
 
 	@Test
 	void contain_four_dead_cells_if_2_x_2_grid_with_one_alive() {
 		//given
-		boolean [][] seedState = {{false, false},{false, true}};
+		Cell [][] seedState = {{new DeadCell(0,0), new DeadCell(1,0)},{new DeadCell(0,1), new AliveCell(1,1)}};
 		target = new GameOfLife(seedState);
 
 		//when
-		boolean [][] currentState = target.nextGen();
+		Cell [][] currentState = target.nextGen();
 
 		//then
-		assertFalse(currentState[0][0]);
-		assertFalse(currentState[0][1]);
-		assertFalse(currentState[1][0]);
-		assertFalse(currentState[1][1]);
+		assertTrue(currentState[0][0] instanceof DeadCell);
+		assertTrue(currentState[1][0] instanceof DeadCell);;
+		assertTrue(currentState[0][1] instanceof DeadCell);
+		assertTrue(currentState[1][1] instanceof DeadCell);
 	}
 
 	@Test
 	void contain_three_alive_cells_if_2_x_2_grid_with_three_alive() {
 		//given
-		boolean [][] seedState = {{false, true}, {true, true}};
+		Cell [][] seedState = {{new DeadCell(0,0), new AliveCell(1,0)}, {new AliveCell(0,1), new AliveCell(1,1)}};
 		target = new GameOfLife(seedState);
 
 		//when
-		boolean [][] currentState = target.nextGen();
+		Cell [][] currentState = target.nextGen();
 
 		//then
-		assertTrue(currentState[0][1]);
-		assertTrue(currentState[1][0]);
-		assertTrue(currentState[1][1]);
+		assertTrue(currentState[1][0] instanceof AliveCell);
+		assertTrue(currentState[0][1] instanceof AliveCell);
+		assertTrue(currentState[1][1] instanceof AliveCell);
 	}
 
 	@Test
 	void cell_dies_if_more_than_3_neighbours_alive() {
 		//given
-		boolean [][] seedState = {{true, true, true}, {true, true, true}, {true, true, true}};
+		Cell [][] seedState = {{new AliveCell(0,0), new AliveCell(0,1), new AliveCell(0,2)},
+				{new AliveCell(1,0), new AliveCell(1,1), new AliveCell(1,2)}, {new AliveCell(2,0), new AliveCell(2,1), new AliveCell(2,2)}};
 		target = new GameOfLife(seedState);
 
 		//when
-		boolean [][] currentState = target.nextGen();
+		Cell [][] currentState = target.nextGen();
 
 		//then
-		assertFalse(currentState[1][1]);
+		assertTrue(currentState[1][1] instanceof DeadCell);
 	}
 
 	@Test
 	void cell_should_come_back_to_life_if_have_3_alive_neighbours() {
 		//given
-		boolean [][] seedState = {{false, true}, {true, true}};
+		Cell [][] seedState = {{new DeadCell(0,0), new AliveCell(1,0)}, {new AliveCell(0,1), new AliveCell(1,1)}};
 		target = new GameOfLife(seedState);
 
 		//when
-		boolean [][] currentState = target.nextGen();
+		Cell [][] currentState = target.nextGen();
 
 		//then
-		assertTrue(currentState[0][0]);
+		assertTrue(currentState[0][0] instanceof AliveCell);
 	}
 }

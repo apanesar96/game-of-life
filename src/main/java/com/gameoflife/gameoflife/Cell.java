@@ -1,6 +1,6 @@
 package com.gameoflife.gameoflife;
 
-public abstract class Cell {
+abstract class Cell {
     public int x;
     public int y;
 

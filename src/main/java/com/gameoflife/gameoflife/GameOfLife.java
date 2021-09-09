@@ -8,9 +8,9 @@ import java.util.List;
 
 @SpringBootApplication
 public class GameOfLife {
-	private boolean [][] boardState;
+	private Cell [][] boardState;
 
-	public GameOfLife(boolean [][] seedState) {
+	public GameOfLife(Cell[][] seedState) {
 		boardState = seedState;
 	}
 
@@ -31,14 +31,14 @@ public class GameOfLife {
 //						livingNeighbours++;
 //					}
 //				}
-		if (isWithinGrid(x, y - 1) && boardState[y - 1][x]) livingNeighbours++;
-		if (isWithinGrid(x + 1, y - 1) && boardState[y - 1][x + 1]) livingNeighbours++;
-		if (isWithinGrid(x + 1, y) && boardState[y][x + 1]) livingNeighbours++;
-		if (isWithinGrid(x + 1, y + 1) && boardState[y + 1][x + 1]) livingNeighbours++;
-		if (isWithinGrid(x, y + 1) && boardState[y + 1][x]) livingNeighbours++;
-		if (isWithinGrid(x - 1, y + 1) && boardState[y + 1][x - 1]) livingNeighbours++;
-		if (isWithinGrid(x - 1, y) && boardState[y][x - 1]) livingNeighbours++;
-		if (isWithinGrid(x - 1, y - 1) && boardState[y - 1][x - 1]) livingNeighbours++;
+		if (isWithinGrid(x, y - 1) && boardState[y - 1][x] instanceof AliveCell) livingNeighbours++;
+		if (isWithinGrid(x + 1, y - 1) && boardState[y - 1][x + 1] instanceof AliveCell) livingNeighbours++;
+		if (isWithinGrid(x + 1, y) && boardState[y][x + 1] instanceof AliveCell) livingNeighbours++;
+		if (isWithinGrid(x + 1, y + 1) && boardState[y + 1][x + 1] instanceof AliveCell) livingNeighbours++;
+		if (isWithinGrid(x, y + 1) && boardState[y + 1][x] instanceof AliveCell) livingNeighbours++;
+		if (isWithinGrid(x - 1, y + 1) && boardState[y + 1][x - 1] instanceof AliveCell) livingNeighbours++;
+		if (isWithinGrid(x - 1, y) && boardState[y][x - 1] instanceof AliveCell) livingNeighbours++;
+		if (isWithinGrid(x - 1, y - 1) && boardState[y - 1][x - 1] instanceof AliveCell) livingNeighbours++;
 
 		return livingNeighbours;
 	}
@@ -47,14 +47,14 @@ public class GameOfLife {
 		return (y >= 0 && y < boardState.length) && (x >= 0 && x < boardState[0].length);
 	}
 
-	public boolean[][] nextGen() {
-		boolean [][] nextGenGrid = boardState;
+	public Cell[][] nextGen() {
+		Cell [][] nextGenGrid = boardState;
 
 		for (int i = 0; i < boardState.length; i++) {
 			for (int j = 0; j < boardState[i].length; j++) {
 
-				boolean cell = boardState[i][j];
-				nextGenGrid[i][j] = cell.computeNextStatus();
+				Cell cell = boardState[i][j];
+				nextGenGrid[i][j] = cell.computeNextStatus(countLivingNeighbours(i, j));
 //
 //				if(cell && countLivingNeighbours(i, j) < 2) {
 //					nextGenGrid[i][j] = false;
