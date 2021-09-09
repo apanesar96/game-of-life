@@ -76,4 +76,17 @@ class GameOfLifeShould {
 		//then
 		assertFalse(currentState[1][1]);
 	}
+
+	@Test
+	void cell_should_come_back_to_life_if_have_3_alive_neighbours() {
+		//given
+		boolean [][] seedState = {{false, true}, {true, true}};
+		target = new GameOfLife(seedState);
+
+		//when
+		boolean [][] currentState = target.nextGen();
+
+		//then
+		assertTrue(currentState[0][0]);
+	}
 }
