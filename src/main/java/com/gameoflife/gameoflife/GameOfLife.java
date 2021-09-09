@@ -52,15 +52,17 @@ public class GameOfLife {
 
 		for (int i = 0; i < boardState.length; i++) {
 			for (int j = 0; j < boardState[i].length; j++) {
-				boolean cell = boardState[i][j];
 
-				if(cell && countLivingNeighbours(i, j) < 2) {
-					nextGenGrid[i][j] = false;
-				} else if(cell && countLivingNeighbours(i, j) > 3)  {
-					nextGenGrid[i][j] = false;
-				} else if(!cell && countLivingNeighbours(i, j) == 3) {
-					nextGenGrid[i][j] = true;
-				}
+				boolean cell = boardState[i][j];
+				nextGenGrid[i][j] = cell.computeNextStatus();
+//
+//				if(cell && countLivingNeighbours(i, j) < 2) {
+//					nextGenGrid[i][j] = false;
+//				} else if(cell && countLivingNeighbours(i, j) > 3)  {
+//					nextGenGrid[i][j] = false;
+//				} else if(!cell && countLivingNeighbours(i, j) == 3) {
+//					nextGenGrid[i][j] = true;
+//				}
 			}
 		}
 		boardState = nextGenGrid;
