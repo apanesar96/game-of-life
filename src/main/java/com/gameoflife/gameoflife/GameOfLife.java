@@ -56,8 +56,6 @@ public class GameOfLife {
 
 				if(cell && countLivingNeighbours(i, j) < 2) {
 					nextGenGrid[i][j] = false;
-				} else if (cell && (countLivingNeighbours(i, j) == 2 || countLivingNeighbours(i, j) == 3)) {
-					nextGenGrid[i][j] = true;
 				} else if(cell && countLivingNeighbours(i, j) > 3)  {
 					nextGenGrid[i][j] = false;
 				} else if(!cell && countLivingNeighbours(i, j) == 3) {
