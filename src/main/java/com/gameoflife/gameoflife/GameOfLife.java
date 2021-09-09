@@ -53,8 +53,10 @@ public class GameOfLife {
 		for (int i = 0; i < boardState.length; i++) {
 			for (int j = 0; j < boardState[i].length; j++) {
 				boolean cell = boardState[i][j];
-				if (cell && countLivingNeighbours(i, j) >= 2) {
+				if (cell && (countLivingNeighbours(i, j) == 2 || countLivingNeighbours(i, j) == 3)) {
 					nextGenGrid[i][j] = true;
+				} else if(cell && countLivingNeighbours(i, j) > 3)  {
+					nextGenGrid[i][j] = false;
 				} else {
 					nextGenGrid[i][j] = false;
 				}

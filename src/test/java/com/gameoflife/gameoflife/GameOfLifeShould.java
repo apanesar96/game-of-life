@@ -59,7 +59,6 @@ class GameOfLifeShould {
 		boolean [][] currentState = target.nextGen();
 
 		//then
-		assertFalse(currentState[0][0]);
 		assertTrue(currentState[0][1]);
 		assertTrue(currentState[1][0]);
 		assertTrue(currentState[1][1]);
