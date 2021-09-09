@@ -36,7 +36,7 @@ class GameOfLifeShould {
 	@Test
 	void contain_four_dead_cells_if_2_x_2_grid_with_one_alive() {
 		//given
-		boolean [][] seedState = {{false, false}, {false, true}};
+		boolean [][] seedState = {{false, false},{false, true}};
 		target = new GameOfLife(seedState);
 
 		//when
