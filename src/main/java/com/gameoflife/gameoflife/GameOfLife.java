@@ -44,7 +44,9 @@ public class GameOfLife {
 	}
 
 	private boolean isWithinGrid(int x, int y) {
-		return (y >= 0 && y <= boardState.length) && (x >= 0 && x <= boardState[0].length);
+
+		boolean test =  (y >= 0 && y < boardState.length) && (x >= 0 && x < boardState[0].length);
+		return test;
 	}
 
 	public boolean[][] nextGen() {
