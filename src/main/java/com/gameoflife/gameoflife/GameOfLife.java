@@ -4,10 +4,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GameOfLifeApplication {
+public class GameOfLife {
+	private boolean [][] boardState;
 
-	public static void main(String[] args) {
-		SpringApplication.run(GameOfLifeApplication.class, args);
+	public GameOfLife(boolean [][] seedState) {
+		boardState = seedState;
 	}
 
+	public boolean[][] nextGen() {
+		return boardState;
+	}
 }
