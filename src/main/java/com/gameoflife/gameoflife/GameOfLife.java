@@ -28,16 +28,18 @@ public class GameOfLife {
 	private int countLivingNeighbours(int x, int y) {
 		int livingNeighbours = 0;
 
-		if (isWithinGrid(x, y - 1) && boardState[y - 1][x] instanceof AliveCell) livingNeighbours++;
-		if (isWithinGrid(x + 1, y - 1) && boardState[y - 1][x + 1] instanceof AliveCell) livingNeighbours++;
-		if (isWithinGrid(x + 1, y) && boardState[y][x + 1] instanceof AliveCell) livingNeighbours++;
-		if (isWithinGrid(x + 1, y + 1) && boardState[y + 1][x + 1] instanceof AliveCell) livingNeighbours++;
-		if (isWithinGrid(x, y + 1) && boardState[y + 1][x] instanceof AliveCell) livingNeighbours++;
-		if (isWithinGrid(x - 1, y + 1) && boardState[y + 1][x - 1] instanceof AliveCell) livingNeighbours++;
-		if (isWithinGrid(x - 1, y) && boardState[y][x - 1] instanceof AliveCell) livingNeighbours++;
-		if (isWithinGrid(x - 1, y - 1) && boardState[y - 1][x - 1] instanceof AliveCell) livingNeighbours++;
+		for (int i = -1; i <= 1 ; i++) {
+			for (int j = -1; j <= 1 ; j++) {
+				if(i == 0 && j == 0) continue;
+				if (isAliveNeighbour(x + i, y + j)) livingNeighbours++;
+			}
+		}
 
 		return livingNeighbours;
+	}
+
+	private boolean isAliveNeighbour(int x, int y) {
+		return isWithinGrid(x, y) && boardState[y][x] instanceof AliveCell;
 	}
 
 	private boolean isWithinGrid(int x, int y) {
