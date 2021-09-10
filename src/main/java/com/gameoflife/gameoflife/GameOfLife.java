@@ -15,7 +15,6 @@ public class GameOfLife {
 
 		for (int i = 0; i < boardState.length; i++) {
 			for (int j = 0; j < boardState[i].length; j++) {
-
 				Cell cell = boardState[i][j];
 				nextGenGrid[i][j] = cell.computeNextStatus(countLivingNeighbours(i, j));
 			}

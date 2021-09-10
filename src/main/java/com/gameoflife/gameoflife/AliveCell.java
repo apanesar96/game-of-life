@@ -1,10 +1,8 @@
 package com.gameoflife.gameoflife;
 
-public class AliveCell extends Cell {
+public class AliveCell implements Cell {
     @Override
     public Cell computeNextStatus(int livingNeighbours) {
-        if(livingNeighbours < 2 || livingNeighbours > 3) return new DeadCell();
-
-        return this;
+        return (livingNeighbours < 2 || livingNeighbours > 3) ? new DeadCell() : this;
     }
 }

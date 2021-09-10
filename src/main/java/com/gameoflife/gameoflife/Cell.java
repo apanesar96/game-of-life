@@ -1,5 +1,5 @@
 package com.gameoflife.gameoflife;
 
-abstract class Cell {
-    public abstract Cell computeNextStatus(int livingNeighbours);
+interface Cell {
+    Cell computeNextStatus(int livingNeighbours);
 }

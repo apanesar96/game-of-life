@@ -15,8 +15,10 @@ class GameOfLifeShould {
 		//given
 		Cell[][] seedState = {{new DeadCell()}};
 		target = new GameOfLife(seedState);
+
 		//when
 		Cell[][] currentState = target.nextGen();
+
 		//then
 		assertTrue(currentState[0][0] instanceof DeadCell);
 	}
@@ -26,8 +28,10 @@ class GameOfLifeShould {
 		//given
 		Cell[][] seedState = {{new AliveCell()}};
 		target = new GameOfLife(seedState);
+
 		//when
 		Cell[][] currentState = target.nextGen();
+
 		//then
 		assertTrue(currentState[0][0] instanceof DeadCell);
 	}
